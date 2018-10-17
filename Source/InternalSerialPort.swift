@@ -66,7 +66,7 @@ class _SerialPort: NSObject {
 	
 	required init?(device: io_object_t) {
 		guard let bsdPath = device.bsdCalloutPath,
-			name = device.modemName else {
+			let name = device.modemName else {
 				self.path = ""
 				self.IOKitDevice = 0
 				self.name = ""
@@ -308,7 +308,7 @@ class _SerialPort: NSObject {
 		doOnMainThreadAndWait { self.isOpen = false }
 		
 		if let host = self.host,
-			delegateCall = host.delegate?.serialPortWasClosed {
+			let delegateCall = host.delegate?.serialPortWasClosed {
 				doOnMainThreadAndWait {
 					delegateCall(host)
 				}
@@ -347,8 +347,7 @@ class _SerialPort: NSObject {
 					buffer.appendData(byte)
 					
 					// Check for complete packet
-					guard let completePacket = self.packetMatchingDescriptor(descriptor, atEndOfBuffer: buffer.data)
-						where completePacket.length > 0 else { continue }
+					guard let completePacket = self.packetMatchingDescriptor(descriptor, atEndOfBuffer: buffer.data) where completePacket.length > 0 else { continue }
 					
 					// Complete packet received, so notify delegate then clear buffer
 					if let host = self.host {
