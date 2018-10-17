@@ -1,3 +1,4 @@
+//  Converted to Swift 4 by Swiftify v4.2.6846 - https://objectivec2swift.com/
 //
 //  ORSSerialBuffer.h
 //  ORSSerialPort
@@ -6,21 +7,22 @@
 //  Copyright (c) 2015 Open Reel Software. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+import Foundation
 
 // Keep older versions of the compiler happy
-#ifndef NS_DESIGNATED_INITIALIZER
-#define NS_DESIGNATED_INITIALIZER
+#if !NS_DESIGNATED_INITIALIZER
+//#define NS_DESIGNATED_INITIALIZER
 #endif
+class ORSSerialBuffer: NSObject {
+    private(set) var data: Data?
+    private(set) var maximumLength: Int = 0
 
-@interface ORSSerialBuffer : NSObject
+    required init(maximumLength maxLength: Int) {
+    }
 
-- (instancetype)initWithMaximumLength:(NSUInteger)maxLength NS_DESIGNATED_INITIALIZER;
+    func append(_ data: Data) {
+    }
 
-- (void)appendData:(NSData *)data;
-- (void)clearBuffer;
-
-@property (nonatomic, strong, readonly) NSData *data;
-@property (nonatomic, readonly) NSUInteger maximumLength;
-
-@end
+    func clear() {
+    }
+}
