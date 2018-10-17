@@ -347,7 +347,8 @@ class _SerialPort: NSObject {
 					buffer.appendData(byte)
 					
 					// Check for complete packet
-					guard let completePacket = self.packetMatchingDescriptor(descriptor, atEndOfBuffer: buffer.data) where completePacket.length > 0 else { continue }
+					guard let completePacket = self.packetMatchingDescriptor(descriptor, atEndOfBuffer: buffer.data),
+						where completePacket.length > 0 else { continue }
 					
 					// Complete packet received, so notify delegate then clear buffer
 					if let host = self.host {
@@ -424,7 +425,7 @@ class _SerialPort: NSObject {
 		self.pendingRequestTimeoutTimer = nil
 		
 		guard let request = self.pendingRequest else { return }
-		if let host = self.host, delegateCall: (SerialPort, SerialRequest) -> () = host.delegate?.serialPort {
+		if let host = self.host, delegateCall: (SerialPort, SerialRequest) -> () = let host.delegate?.serialPort {
 			dispatch_async(dispatch_get_main_queue()) {
 				delegateCall(host, request)
 				dispatch_async(self.requestHandlingQueue, self.sendNextRequest)
