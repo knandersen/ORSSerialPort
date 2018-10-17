@@ -1,4 +1,0 @@
-module ORSSerialPort [system] {
-    header "ORSSerialPort.h"
-    export *
-}

@@ -1,7 +1,3 @@
-//  The converted code is limited to 1 KB.
-//  Please Sign Up (Free!) to remove this limitation.
-// 
-//  Converted to Swift 4 by Swiftify v4.2.6846 - https://objectivec2swift.com/
 //
 //  ORSSerialBuffer.m
 //  ORSSerialPort
@@ -10,33 +6,51 @@
 //  Copyright (c) 2015 Open Reel Software. All rights reserved.
 //
 
-class ORSSerialBuffer {
-    private var internalBuffer: Data?
+#import "ORSSerialBuffer.h"
 
-// MARK: - Properties
-    class func keyPathsForValuesAffectingData() -> Set<AnyHashable>? {
-        return Set<AnyHashable>(["internalData"])
-    }
+@interface ORSSerialBuffer ()
 
-    convenience init() {
-        NSException.raise(NSExceptionName.internalInconsistencyException, format: "Use -[ORSSerialBuffer initWithMaximumLength:]")
-        return nil
-    }
+@property (nonatomic, strong) NSMutableData *internalBuffer;
 
-    init(maximumLength maxLength: Int) {
-        super.init()
-        
-        internalBuffer = Data()
-        maximumLength = maxLength
-    
-    }
+@end
 
-    func append(_ data: Data) {
-        willChangeValue(forKey: "internalBuffer")
-        internalBuffer?.append(data)
-        if (internalBuffer?.count ?? 0) > maximumLength {
-// 
-//  The converted code is limited to 1 KB.
-//  Please Sign Up (Free!) to remove this limitation.
-// 
-//  %< ----------------------------------------------------------------------------------------- %<
+@implementation ORSSerialBuffer
+
+- (instancetype)init NS_UNAVAILABLE
+{
+	[NSException raise:NSInternalInconsistencyException format:@"Use -[ORSSerialBuffer initWithMaximumLength:]"];
+	return nil;
+}
+
+- (instancetype)initWithMaximumLength:(NSUInteger)maxLength
+{
+	self = [super init];
+	if (self) {
+		_internalBuffer = [NSMutableData data];
+		_maximumLength = maxLength;
+	}
+	return self;
+}
+
+- (void)appendData:(NSData *)data
+{
+	[self willChangeValueForKey:@"internalBuffer"];
+	[self.internalBuffer appendData:data];
+	if ([self.internalBuffer length] > self.maximumLength) {
+		NSRange rangeToDelete = NSMakeRange(0, [self.internalBuffer length] - self.maximumLength);
+		[self.internalBuffer replaceBytesInRange:rangeToDelete withBytes:NULL length:0];
+	}
+	[self didChangeValueForKey:@"internalBuffer"];
+}
+
+- (void)clearBuffer
+{
+	self.internalBuffer = [NSMutableData data];
+}
+
+#pragma mark - Properties
+
++ (NSSet *)keyPathsForValuesAffectingData { return [NSSet setWithObjects:@"internalData", nil]; }
+- (NSData *)data { return self.internalBuffer; }
+
+@end
