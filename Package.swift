@@ -5,6 +5,6 @@ let package = Package(
 	targets: [],
 	dependencies: [
 		
-	],
+	]
 
 )
