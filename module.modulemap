@@ -1,0 +1,5 @@
+module ORSSerialPort [system] {
+  header "/usr/include/ORSSerialPort.h"
+  link "ORSSerialPort"
+  export *
+}
