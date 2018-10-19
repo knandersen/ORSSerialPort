@@ -1,5 +1,5 @@
 module ORSSerialPort [system] {
-  header "shim.h"
+  header "ORSSerial.h"
   link "ORSSerialPort"
   export *
 }
