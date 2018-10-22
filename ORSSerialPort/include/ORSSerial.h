@@ -24,7 +24,8 @@
 //	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 //	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "../ORSSerialBuffer.h"
+#import "../ORSSerialPacketDescriptor.h"
 #import "../ORSSerialPort.h"
 #import "../ORSSerialPortManager.h"
 #import "../ORSSerialRequest.h"
-#import "../ORSSerialPacketDescriptor.h"
