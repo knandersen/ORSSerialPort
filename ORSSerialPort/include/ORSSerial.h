@@ -29,3 +29,4 @@
 #import "../ORSSerialPort.h"
 #import "../ORSSerialPortManager.h"
 #import "../ORSSerialRequest.h"
+#import "../ORSSerialPort+Attributes.h"
