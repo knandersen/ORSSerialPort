@@ -599,7 +599,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param serialPort The `ORSSerialPort` instance representing the port that received `data`.
  *  @param data       An `NSData` instance containing the data received.
  */
-- (void)serialPort:(ORSSerialPort *)serialPort didReceiveData:(NSData *)data;
+- (void)serialPort:(ORSSerialPort *)serialPort didReceiveData:(NSData *)data NS_SWIFT_NAME(serialPortDidReceiveData(_:data:));
 
 /**
  *  Called when a valid, complete packet matching a descriptor installed with 
