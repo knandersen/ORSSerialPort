@@ -570,10 +570,10 @@ static __strong NSMutableArray *allSerialPorts;
 - (void)receiveData:(NSData *)data;
 {
 	dispatch_async(dispatch_get_main_queue(), ^{
+		NSLog(@"SENDING DATA");
 		if ([self.delegate respondsToSelector:@selector(serialPort:didReceiveData:)])
 		{
-			NSLog(@"SENDING DATA");
-			[self.delegate serialPort:self didReceiveData:data];
+			[(id)self.delegate serialPort:self didReceiveData:data];
 		}
 	});
 	
